@@ -4,13 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
-namespace demo.datalayer.models
+namespace demo.bl.dto
 {
-    public class department:baseentity
+    public class departmentdto
     {
+        public int id {  get; set; }
         public string name { get; set; }
-        public int code { get; set; }
         public string description { get; set; }
+        public string code { get; set; }
+        public DateOnly dateofcreation { get; set; }
+
     }
 }

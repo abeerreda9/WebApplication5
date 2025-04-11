@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\demo.datalayer\demo.datalayer.csproj" />
+    <ProjectReference Include="..\WebApplication5\WebApplication5.csproj" />
+  </ItemGroup>
+
 </Project>

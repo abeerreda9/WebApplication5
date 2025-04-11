@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
-namespace demo.datalayer.models
+namespace demo.bl.dto
 {
-    public class department:baseentity
+    public class createddepartmentdto
     {
         public string name { get; set; }
-        public int code { get; set; }
+        public string code { get; set; }
         public string description { get; set; }
     }
 }
