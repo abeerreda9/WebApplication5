@@ -16,8 +16,8 @@ namespace demo.datalayer.data.configrations
            builder.Property(d=>d.id).UseIdentityColumn(10,10);
             builder.Property(d => d.name).HasColumnType("varchar(20)");
             builder.Property(d => d.code).HasColumnType("varchar(20)");
-            builder.Property(d => d.createdon).HasDefaultValueSql("GETDATE()");
-            builder.Property(d => d.lastmodifiedon).HasComputedColumnSql("GETDATE()");
+            
+
 
         }
     }

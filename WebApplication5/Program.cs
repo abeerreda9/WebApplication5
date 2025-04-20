@@ -1,3 +1,9 @@
+using demo.datalayer.data.repositry.classes;
+using demo.datalayer.data.repositry.interfaceies;
+using demo.bl.dto;
+using demo.bl.services.interfaces;
+using demo.bl.services.classes;
+
 namespace WebApplication5
 {
     public class Program
@@ -18,7 +24,9 @@ namespace WebApplication5
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
+            builder.Services.AddScoped<iemployeerepo, emprepo>();
+            //builder.Services.auto(typeof(mapping_profile).Assembly);
+            builder.Services.AddScoped<iemployeeservice,Employeeservice>();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
