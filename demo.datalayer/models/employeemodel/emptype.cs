@@ -8,6 +8,7 @@ namespace demo.datalayer.models.employeemodel
 {
     public enum emptype
     {
+
         fulltime,
         parttime
     }
