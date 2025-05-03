@@ -8,6 +8,8 @@ namespace demo.datalayer.Migrations
     /// <inheritdoc />
     public partial class employee : Migration
     {
+        internal object department;
+
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {

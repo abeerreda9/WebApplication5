@@ -29,5 +29,7 @@ namespace WebApplication5.Models
         public DateOnly HiringDate { get; set; }
         public empgender Gender { get; set; }
         public emptype EmployeeType { get; set; }
+        [Display(Name ="department")]
+        public int? departmentid { get; set; }
     }
 }

@@ -13,7 +13,13 @@ namespace demo.datalayer.data.repositry.classes
     public class emprepo : iemployeerepo
     {
         private appdbcontext _dbcontext;//null
-       
+        private appdbcontext dbcontext;
+
+        public emprepo(appdbcontext dbcontext)
+        {
+            this.dbcontext = dbcontext;
+        }
+
         public int add(employee entity)
         {
             _dbcontext.employee.Add(entity);
@@ -45,6 +51,11 @@ namespace demo.datalayer.data.repositry.classes
         {
             return _dbcontext.employee.Find(id);
 
+        }
+
+        public IQueryable<employee> getempbyname(string name)
+        {
+            return _dbcontext.employee.Where(e=>e.name.ToLower().Contains(name));
         }
 
         public int update(employee entity)

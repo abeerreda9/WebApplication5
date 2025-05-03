@@ -18,5 +18,8 @@ namespace demo.datalayer.models.employeemodel
         public DateTime hiringdate { get; set; }
         public empgender gender { get; set; }
         public employee type { get; set; }
+        public int? departmentid { get; set; } //fk colomn
+        //navigation prop[one]
+        public virtual department department { get; set; }
     }
 }

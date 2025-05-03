@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Hosting;
 using demo.datalayer.models.employeemodel;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using WebApplication5.Models;
+using demo.bl.services;
+using demo.datalayer.data.repositry.classes;
 
 namespace WebApplication5.Controllers
 {
@@ -15,6 +17,7 @@ namespace WebApplication5.Controllers
         private readonly ILogger<empcontroller> _logger;
         private readonly IWebHostEnvironment _environment;
 
+
         public empcontroller(iemployeeservice empservice, ILogger<empcontroller> logger, IWebHostEnvironment environment)
         {
             _empservice = empservice;
@@ -22,14 +25,22 @@ namespace WebApplication5.Controllers
             _environment = environment;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string ? EmployeeSearchName)
         {
             //binding through views dictionry:transfer data from action to view
-            //1.view data
-            ViewData["Message"] = "hello";
-            //2.view bag
-            ViewBag.Message = "hello view bag";
-            var emp = _empservice.getallemp();
+            ////1.view data
+            //ViewData["Message"] = "hello";
+            ////2.view bag
+            //ViewBag.Message = "hello view bag";
+            dynamic emp = null!;
+            if(string.IsNullOrEmpty(EmployeeSearchName))
+            {
+                emp = _empservice.getallemp();
+            }
+            else
+            {
+                emp = _empservice.getallemp().Where(e=>e.name == "EmployeeSearchName");
+            }
             return View(emp);
         }
 
@@ -37,7 +48,9 @@ namespace WebApplication5.Controllers
         [HttpGet]
         public IActionResult create()
         {
-            return View();
+            //ViewData["departments"] = _departmentservice.getall();
+            //return View();
+
         }
 
         [HttpPost]
@@ -58,14 +71,16 @@ namespace WebApplication5.Controllers
                     HiringDate= empdto.HiringDate,
                     PhoneNumber= empdto.PhoneNumber,
                     Salary= empdto.Salary,
+                    departmentid=empdto.departmentid
                     };
-                    int result = _empservice.createemp(emp);
+                   /* int result = */_empservice.createemp(emp);
                     //3.temp data
-                    if (result > 0)
-                    {
-                        TempData["Message"] = "employee created succesfully";
-                        return RedirectToAction(nameof(Index));
-                    }
+                    //if (result > 0)
+                    //{
+                    //    TempData["Message"] = "employee created succesfully";
+                    //    return RedirectToAction(nameof(Index));
+                    //}
+
                     else
                     {
                         TempData["Message"] = "employee created failed";
@@ -116,8 +131,10 @@ if(employee == null)return NotFound();
                 PhoneNumber = employee.phonenumber,
                 Gender = Enum.Parse<empgender>(employee.gender),
                 EmployeeType = Enum.Parse<emptype>(employee.employeetype)
+
             };
-               return View(employeedto);
+            //ViewData["departments"] = _departmentservice.getall();
+            //return View(employeedto);
         }
 
         #endregion

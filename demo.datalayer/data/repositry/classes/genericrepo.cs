@@ -18,10 +18,10 @@ namespace demo.datalayer.data.repositry.classes
             _dbcontext = dbcontext;
         }
 
-        public int Add(T entity)
+        public void Add(T entity)
         {
             _dbcontext.Set<T>().Add(entity);
-            return _dbcontext.SaveChanges();
+          
         }
 
         public int add(T entity)
@@ -29,13 +29,13 @@ namespace demo.datalayer.data.repositry.classes
             throw new NotImplementedException();
         }
 
-        public int Delete(T entity)
+        public void Delete(T entity)
         {
             _dbcontext.Set<T>().Remove(entity); // remove locally
-            return _dbcontext.SaveChanges();
+           
         }
 
-        public int delete(T entity)
+        public void delete(T entity)
         {
             throw new NotImplementedException();
         }
@@ -67,13 +67,18 @@ namespace demo.datalayer.data.repositry.classes
             throw new NotImplementedException();
         }
 
-        public int Update(T entity)
+        public void Update(T entity)
         {
             _dbcontext.Set<T>().Update(entity); // update locally
-            return _dbcontext.SaveChanges();
+           
         }
 
-        public int update(T entity)
+        public void update(T entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        void igenericrepo<T>.add(T entity)
         {
             throw new NotImplementedException();
         }

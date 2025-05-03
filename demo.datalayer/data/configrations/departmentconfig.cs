@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
+
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,8 +18,13 @@ namespace demo.datalayer.data.configrations
             builder.Property(d => d.name).HasColumnType("varchar(20)");
             builder.Property(d => d.code).HasColumnType("varchar(20)");
             
+            builder.HasMany(d=>d.emplioyee).WithOne().OnDelete(DeleteBehavior.Cascade);
+             void Configure(EntityTypeBuilder<department> builder)
+            {
+                builder.ToTable("Departments"); // اسم الجدول في قاعدة البيانات
+                builder.HasKey(d => d.id); }
 
 
-        }
+            }
     }
 }

@@ -21,5 +21,6 @@ namespace demo.bl.dto
         public string gender { get; set; }
         [Display(Name = "emp type ")]
         public string employeetype { get; set; }
+        public string department { get; set; }
     }
 }

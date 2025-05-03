@@ -1,5 +1,6 @@
 ﻿using demo.bl.dto;
 using demo.bl.factories;
+using demo.datalayer.data.repositries.Interfaces;
 using demo.datalayer.data.repositry.classes;
 using demo.datalayer.data.repositry.Interface;
 using demo.datalayer.models;
@@ -13,17 +14,17 @@ namespace demo.bl.services
 {
     public class DepartmentService
     {
-        private readonly idepartmentrepository _departmentRepo;
+        public readonly Iunitofwork _unitofwork;
 
-        public DepartmentService(idepartmentrepository departmentRepo)
+        public DepartmentService(Iunitofwork unitofwork)
         {
-            _departmentRepo = departmentRepo;
+            _unitofwork = unitofwork;
         }
 
         // Get all departments
         public IEnumerable<departmentdto> GetAllDepartments()
         {
-            var departments = _departmentRepo.Getall();
+            var departments = _unitofwork.departmentrepo.Getall();
             //1.manual mapping
             //var departmentsToReturn = departments.Select(department => new departmentdto
             //{
@@ -42,7 +43,7 @@ namespace demo.bl.services
 
         public departmentdetailsdto GetById(int id)
         {
-            var department = _departmentRepo.getbyid(id);
+            var department = _unitofwork.departmentrepo.getbyid(id);
             //manual mapping
             //auto mapper if large
             //constructor mapping
@@ -65,7 +66,9 @@ namespace demo.bl.services
         public int adddepartment(createddepartmentdto department)
         {
             var departments = department.toentity();
-           return _departmentRepo.add(departments);
+            _unitofwork.departmentrepo.add(departments);
+
+           return _unitofwork.savechanges();
         }
     }
 

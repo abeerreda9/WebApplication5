@@ -33,5 +33,6 @@ namespace demo.bl.dto
         public DateOnly HiringDate { get; set; }
         public empgender Gender { get; set; }
         public emptype EmployeeType { get; set; }
+        public int? departmentid { get; set; }
     }
 }

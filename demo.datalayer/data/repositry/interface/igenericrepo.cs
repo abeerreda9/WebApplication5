@@ -13,10 +13,10 @@ namespace demo.datalayer.data.repositry. interfaceis
         //get id
         T getbyid(int id);
         //update
-        int update(T entity);
+        void update(T entity);
         //delete
-        int delete(T entity);
+        void delete(T entity);
         //insert
-        int add(T entity);
+        void add(T entity);
     }
 }

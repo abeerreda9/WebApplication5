@@ -14,8 +14,8 @@ namespace demo.bl.profiles
     {
         public mapping_profile()
         {
-            CreateMap<employee, employeedto>();
-                
+            CreateMap<employee, employeedto>()
+                .ForMember(dest => dest.department, Options.MapFrom(src => src.department.name));
 
             CreateMap<employee,empdetailsdto>();
         }
