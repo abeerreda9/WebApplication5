@@ -47,9 +47,9 @@ namespace demo.datalayer.data.repositry.classes
             throw new NotImplementedException();
         }
 
-        public employee getbyid(int id)
+        public IQueryable<employee> getbyid(int id)
         {
-            return _dbcontext.employee.Find(id);
+            return _dbcontext.employee.Where(e => e.id == id);
 
         }
 

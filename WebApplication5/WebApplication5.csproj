@@ -18,4 +18,8 @@
     <ProjectReference Include="..\ClassLibrary1\demo.bl.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\files\image\" />
+  </ItemGroup>
+
 </Project>

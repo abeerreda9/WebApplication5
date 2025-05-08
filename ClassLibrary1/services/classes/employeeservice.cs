@@ -16,6 +16,9 @@ using employee = demo.datalayer.models.employeemodel.employee;
 using demo.datalayer.data.repositries.Interfaces;
 using demo.datalayer.data.repositry.Interface;
 using demo.datalayer.data.repositry.interfaceies;
+using demo.bl.services.attachment_service;
+using  demo.bl.services.attachment_service;
+
 
 namespace demo.bl.services.classes
 {
@@ -23,11 +26,12 @@ namespace demo.bl.services.classes
         public class Employeeservice :iemployeeservice
         {
             private readonly Iunitofwork _unit;
-
-            public Employeeservice(Iunitofwork unirofwork)
-            {
-                _unit = unirofwork;
-            }
+            private readonly Iattachment_service _attachment;
+        public Employeeservice(Iunitofwork unitOfWork, Iattachment_service attachmentService)
+        {
+            _unit = unitOfWork;
+            _attachment = attachmentService;
+        }
         public Employeeservice(IMapper mapper)
         {
 
@@ -58,20 +62,40 @@ namespace demo.bl.services.classes
             throw new NotImplementedException();
         }
 
-        void iemployeeservice.createemp(CreatedEmpDto emp)
-        {
-            throw new NotImplementedException();
-        }
-
         //void iemployeeservice.createemp(CreatedEmpDto emp)
         //{
-        //    var employee = Mapper.Map<CreatedEmpDto, employee>(emp);
-
+        //    throw new NotImplementedException();
         //}
 
-        bool iemployeeservice.deletedemp(int id)
+        void iemployeeservice.createemp(CreatedEmpDto emp)
         {
-            throw new NotImplementedException();
+            var employee = Mapper.Map<CreatedEmpDto, employee>(emp);
+            if(emp.imagename is not null)
+            {
+              //  emp.imagename = _attachment.upload(emp.imagename, "image");
+            }
+
+        }
+
+        public bool deletedemp(int id)
+        {
+            var emp=_unit.employeerepo.getbyid(id);
+            if (emp == null)
+            {
+                return false;
+            }
+            else
+            {
+              //  emp.IsDeleted = true;
+              //  _unit.employeerepo.update(emp);
+                int result = _unit.savechanges();
+                if (result > 0)
+                {
+               //     _attachment.delete(emp.imagename, "images");
+                    return true;
+                }
+                else { return false; }
+            }
         }
 
         //IEnumerable<employeedto> getallemp(bool withtracking)

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using WebApplication5.Models;
 using demo.bl.services;
 using demo.datalayer.data.repositry.classes;
+using demo.bl.services.attachment_service;
 
 namespace WebApplication5.Controllers
 {
@@ -16,13 +17,14 @@ namespace WebApplication5.Controllers
         private readonly iemployeeservice _empservice;
         private readonly ILogger<empcontroller> _logger;
         private readonly IWebHostEnvironment _environment;
+        private readonly Iattachment_service _attachment;
 
-
-        public empcontroller(iemployeeservice empservice, ILogger<empcontroller> logger, IWebHostEnvironment environment)
+        public empcontroller(iemployeeservice empservice, ILogger<empcontroller> logger, IWebHostEnvironment environment,Iattachment_service attachmentservice)
         {
             _empservice = empservice;
             _logger = logger;
             _environment = environment;
+            _attachment = attachmentservice;
         }
 
         public IActionResult Index(string ? EmployeeSearchName)
@@ -49,7 +51,7 @@ namespace WebApplication5.Controllers
         public IActionResult create()
         {
             //ViewData["departments"] = _departmentservice.getall();
-            //return View();
+            return View();
 
         }
 
@@ -60,20 +62,24 @@ namespace WebApplication5.Controllers
             {
                 try
                 {
-                    var emp=new CreatedEmpDto() { 
-                    Name = empdto.Name,
-                    Address= empdto.Address,
-                    Age= empdto.Age,
-                    IsActive= empdto.IsActive,
-                    Email= empdto.Email,
-                    EmployeeType= empdto.EmployeeType,
-                    Gender= empdto.Gender,
-                    HiringDate= empdto.HiringDate,
-                    PhoneNumber= empdto.PhoneNumber,
-                    Salary= empdto.Salary,
-                    departmentid=empdto.departmentid
+                    var emp = new CreatedEmpDto()
+                    {
+                        Name = empdto.Name,
+                        Address = empdto.Address,
+                        Age = empdto.Age,
+                        IsActive = empdto.IsActive,
+                        Email = empdto.Email,
+                        EmployeeType = empdto.EmployeeType,
+                        Gender = empdto.Gender,
+                        HiringDate = empdto.HiringDate,
+                        PhoneNumber = empdto.PhoneNumber,
+                        Salary = empdto.Salary,
+                        departmentid = empdto.departmentid,
+                        imagename = empdto.image,
+
                     };
-                   /* int result = */_empservice.createemp(emp);
+                    /* int result = */
+                    _empservice.createemp(emp);
                     //3.temp data
                     //if (result > 0)
                     //{
@@ -81,11 +87,12 @@ namespace WebApplication5.Controllers
                     //    return RedirectToAction(nameof(Index));
                     //}
 
-                    else
-                    {
-                        TempData["Message"] = "employee created failed";
-                        ModelState.AddModelError(string.Empty, "Employee not created");
-                    }
+                    //    else
+                    //    {
+                    //        TempData["Message"] = "employee created failed";
+                    //        ModelState.AddModelError(string.Empty, "Employee not created");
+                    //    }
+                    //}
                 }
                 catch (Exception ex)
                 {
@@ -134,18 +141,24 @@ if(employee == null)return NotFound();
 
             };
             //ViewData["departments"] = _departmentservice.getall();
-            //return View(employeedto);
+            return View(employeedto);
         }
 
         #endregion
         #region delete
+        [HttpPost]
         public IActionResult delete (int id)
         {
             if(id==0) return BadRequest();
             try
             {
                 var deleted = _empservice.deletedemp(id);
-                if (deleted) return RedirectToAction(nameof(Index));
+                if (deleted) {
+                 //   _attachment.delete();
+                    return RedirectToAction(nameof(Index)); 
+                
+                }
+
                 else
                 {
                     ModelState.AddModelError(string.Empty, "employee not deleted");

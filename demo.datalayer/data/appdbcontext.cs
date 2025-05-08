@@ -11,10 +11,13 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+
 
 namespace demo.datalayer.data
 {
-    public class appdbcontext:DbContext
+    public class appdbcontext:IdentityDbContext<appuser>
 
 
     {
@@ -33,8 +36,11 @@ namespace demo.datalayer.data
         {
           // modelBuilder.ApplyConfiguration<department>(new departmentconfig());
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            base.OnModelCreating(modelBuilder);
         }
         public DbSet<department> department { get; set; }
         public DbSet<employee> employee { get; set; }
+        //public DbSet <IdentityUser>users { get; set; }
+        //public DbSet <IdentityRole>roles { get; set; }
     }
 }

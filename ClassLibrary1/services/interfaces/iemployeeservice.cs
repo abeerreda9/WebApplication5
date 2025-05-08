@@ -15,6 +15,6 @@ namespace demo.bl.services.interfaces
         empdetailsdto getempbyid(int id);
         void createemp(CreatedEmpDto emp);
         int updateemp(updatedempdto emp);
-        bool deletedemp(int id);
+        public bool deletedemp(int id);
     }
 }

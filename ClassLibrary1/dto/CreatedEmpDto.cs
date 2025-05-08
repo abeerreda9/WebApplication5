@@ -1,4 +1,5 @@
 ﻿using demo.datalayer.models.employeemodel;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -34,5 +35,6 @@ namespace demo.bl.dto
         public empgender Gender { get; set; }
         public emptype EmployeeType { get; set; }
         public int? departmentid { get; set; }
+        public IFormFile imagename { get; set; }
     }
 }

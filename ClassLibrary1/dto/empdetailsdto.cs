@@ -26,6 +26,7 @@ namespace demo.bl.dto
         public DateTime createdon { get; set; }
         public int lastmodifiedby { get; set; }
         public DateTime lastmodifiedin { get; set; }
+        public string? image { get; set; }
 
     }
 }

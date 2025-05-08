@@ -31,5 +31,6 @@ namespace WebApplication5.Models
         public emptype EmployeeType { get; set; }
         [Display(Name ="department")]
         public int? departmentid { get; set; }
+        public IFormFile image { get; set; }
     }
 }

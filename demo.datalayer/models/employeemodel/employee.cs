@@ -21,5 +21,7 @@ namespace demo.datalayer.models.employeemodel
         public int? departmentid { get; set; } //fk colomn
         //navigation prop[one]
         public virtual department department { get; set; }
+        public string? imagename { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

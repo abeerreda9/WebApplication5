@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -22,5 +23,6 @@ namespace demo.bl.dto
         [Display(Name = "emp type ")]
         public string employeetype { get; set; }
         public string department { get; set; }
+       
     }
 }

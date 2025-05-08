@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using demo.datalayer.models.employeemodel;
 
 namespace demo.bl.profiles
 {
@@ -15,7 +16,7 @@ namespace demo.bl.profiles
         public mapping_profile()
         {
             CreateMap<employee, employeedto>()
-                .ForMember(dest => dest.department, Options.MapFrom(src => src.department.name));
+                .ForMember(dest => dest.department, opt=>opt.MapFrom(src => src.department));
 
             CreateMap<employee,empdetailsdto>();
         }

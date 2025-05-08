@@ -11,5 +11,7 @@ namespace demo.datalayer.data.repositry. interfaceies
     public interface iemployeerepo
 {
         IQueryable<employee> getempbyname(string name);
+        IQueryable<employee>getbyid(int id);
+       
     }
 }
